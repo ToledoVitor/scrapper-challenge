@@ -16,12 +16,14 @@ class IStockSpider(scrapy.Spider):
         "https://www.freeimages.com/search/dogs",
     ]
 
-    images_to_fetch = 1000
     images = []
+    images_to_fetch = 1000
+    save_on_db = True
 
-    def __init__(self):
-        self.images_to_fetch = 1000
+    def __init__(self, images_to_fetch: int = 1000, save_on_db: bool = True ):
         self.images = []
+        self.images_to_fetch = images_to_fetch
+        self.save_on_db = save_on_db
 
     @property
     def missing_images(self) -> bool:
@@ -63,5 +65,7 @@ class IStockSpider(scrapy.Spider):
                 )
 
     def close(self, reason):
-        ScrapperStorage().save_images(images=self.images)
+        if self.save_on_db:
+            ScrapperStorage().save_images(images=self.images)
+
         return super().close(self, reason=reason)
