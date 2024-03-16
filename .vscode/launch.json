@@ -1,8 +1,3 @@
-# scrapper-challenge
-
-
-To debug your application in vscode, you can use this configuration of launch.json
-
 {
     "version": "0.1.0",
     "configurations": [

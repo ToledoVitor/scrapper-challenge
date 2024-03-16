@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 scrapy = "^2.11.1"
+black = "^24.3.0"
+isort = "^5.13.2"
 
 
 [build-system]
