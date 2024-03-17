@@ -20,7 +20,7 @@ class IStockSpider(scrapy.Spider):
     images_to_fetch = 1000
     save_on_db = True
 
-    def __init__(self, images_to_fetch: int = 1000, save_on_db: bool = True ):
+    def __init__(self, images_to_fetch: int = 1000, save_on_db: bool = True):
         self.images = []
         self.images_to_fetch = images_to_fetch
         self.save_on_db = save_on_db
@@ -67,7 +67,7 @@ class IStockSpider(scrapy.Spider):
                     f"{self.base_url}{next_page}", callback=self.parse
                 )
 
-    def close(self, reason):
+    def close(self, reason: str):
         if self.save_on_db:
             ScrapperStorage().save_images(images=self.images)
 

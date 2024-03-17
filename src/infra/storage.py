@@ -9,6 +9,7 @@ class ScrapperStorage:
 
         with closing(sqlite3.connect("database.db")) as connection:
             with closing(connection.cursor()) as cursor:
+                logging.info("Database conected: ready to save data")
 
                 try:
                     cursor.execute(
