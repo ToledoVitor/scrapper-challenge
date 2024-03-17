@@ -3,7 +3,7 @@ import logging
 import scrapy
 from scrapy.http.response.html import HtmlResponse
 
-from challenge.infra.storage import ScrapperStorage
+from src.infra.storage import ScrapperStorage
 
 
 class IStockSpider(scrapy.Spider):
