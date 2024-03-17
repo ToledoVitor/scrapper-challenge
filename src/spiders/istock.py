@@ -47,6 +47,9 @@ class IStockSpider(scrapy.Spider):
             ).re(r"https://\s*(.*)")
 
             for picture in pictures:
+                if "istock-banner" in picture:
+                    continue
+
                 to_save = (picture,)  # More fields can be added here
                 self.images_to_fetch -= 1
                 self.images.append(to_save)
