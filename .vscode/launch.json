@@ -8,7 +8,7 @@
             "module": "scrapy",
             "args": [
                 "runspider",
-                "challenge/spiders/istock.py"
+                "src/spiders/istock.py"
             ],
             "console": "integratedTerminal"
         }

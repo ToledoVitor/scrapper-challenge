@@ -13,7 +13,7 @@ To debug your application in vscode, you can use this configuration of launch.js
             "module": "scrapy",
             "args": [
                 "runspider",
-                "challenge/spiders/istock.py"
+                "src/spiders/istock.py"
             ],
             "console": "integratedTerminal"
         }
