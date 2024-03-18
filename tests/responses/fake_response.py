@@ -1,4 +1,4 @@
-from scrapy.http import HtmlResponse, Request
+from scrapy.http import HtmlResponse
 
 
 def fake_response_from_file(file_name: str, url: str) -> HtmlResponse:

@@ -6,8 +6,8 @@ from scrapy.http.response.html import HtmlResponse
 from src.infra.storage import ScrapperStorage
 
 
-class IStockSpider(scrapy.Spider):
-    name = "IStock-dogs"
+class FreeImagesSpider(scrapy.Spider):
+    name = "FreeImages-dogs"
     allowed_domaings = [
         "freeimages.com",
     ]
