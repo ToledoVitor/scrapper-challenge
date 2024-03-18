@@ -1,4 +1,5 @@
 import logging
+from typing import List
 
 import scrapy
 from scrapy.http.response.html import HtmlResponse
@@ -13,7 +14,7 @@ class FreeImagesSpider(scrapy.Spider):
     ]
     base_url = "https://www.freeimages.com"
     start_urls = [
-        "https://www.freeimages.com/search/dogs",
+        "https://www.freeimages.com/search/dog",
     ]
 
     images = []
@@ -45,10 +46,12 @@ class FreeImagesSpider(scrapy.Spider):
             pictures = response.xpath(
                 '//div[contains(@class,"grid-container")]//picture//img/@src'
             ).re(r"https://\s*(.*)")
+            pictures = self.__remove_banners(pictures=pictures)
 
             for picture in pictures:
-                if "istock-banner" in picture:
-                    continue
+                # Already fetched the amount of desired images
+                if not self.missing_images:
+                    return
 
                 to_save = (picture,)  # More fields can be added here
                 self.images_to_fetch -= 1
@@ -66,6 +69,16 @@ class FreeImagesSpider(scrapy.Spider):
                 return scrapy.Request(
                     f"{self.base_url}{next_page}", callback=self.parse
                 )
+
+    def __remove_banners(self, pictures: List[str]) -> List[str]:
+        """
+        In every page search, always have a banner image in the middle of the pictures
+        with there's nothing to do with the dog pictures, and should be removed.
+        """
+        return list(filter(
+            lambda picture: "istock-banner" not in picture, pictures
+        ))
+
 
     def close(self, reason: str):
         if self.save_on_db:
